@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/my-app/static/css/main.77a69eeb.css",
-    "main.js": "/my-app/static/js/main.b75f019a.js",
-    "static/js/453.ed3810f9.chunk.js": "/my-app/static/js/453.ed3810f9.chunk.js",
-    "index.html": "/my-app/index.html",
-    "main.77a69eeb.css.map": "/my-app/static/css/main.77a69eeb.css.map",
-    "main.b75f019a.js.map": "/my-app/static/js/main.b75f019a.js.map",
-    "453.ed3810f9.chunk.js.map": "/my-app/static/js/453.ed3810f9.chunk.js.map"
+    "main.css": "/lawmate_site/static/css/main.77a69eeb.css",
+    "main.js": "/lawmate_site/static/js/main.c4bfc34f.js",
+    "static/js/453.ed3810f9.chunk.js": "/lawmate_site/static/js/453.ed3810f9.chunk.js",
+    "index.html": "/lawmate_site/index.html",
+    "main.77a69eeb.css.map": "/lawmate_site/static/css/main.77a69eeb.css.map",
+    "main.c4bfc34f.js.map": "/lawmate_site/static/js/main.c4bfc34f.js.map",
+    "453.ed3810f9.chunk.js.map": "/lawmate_site/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.77a69eeb.css",
-    "static/js/main.b75f019a.js"
+    "static/js/main.c4bfc34f.js"
   ]
 }
