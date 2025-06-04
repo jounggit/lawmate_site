@@ -45,7 +45,7 @@ const App = () => {
                   </svg>
                 </div>
                 <div className="profile-buttons">
-                  <button className="login-btn">로그인</button>
+                  <button className="login-btn"><a href="register.js">로그인</a></button>
                   <div className="signup-link">회원가입</div>
                 </div>
               </div>
