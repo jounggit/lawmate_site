@@ -1,0 +1,250 @@
+.header {
+  background: #f5f5f5;
+  width: 100%;
+  padding: 0;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.nav-logo {
+  width: 150px;
+  height: auto;
+  display: block;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-item {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px;
+  min-height: calc(100vh - 64px);
+  background-color: #f5f5f5;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo img {
+  width: 32px;
+  height: auto;
+}
+
+.logo h1 {
+  color: #1a237e;
+  margin-top: 8px;
+}
+
+.login-box {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+.login-box h2 {
+  
+  text-align: center;
+  margin-bottom: 32px;
+  color: #333;
+}
+
+.login-section {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 32px;
+}
+
+.user-section, .lawyer-section {
+  flex: 1;
+  background-color: #9EC3E5;
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  width: 400px;
+}
+
+.user-icon {
+  width: 150px;
+  height: 150px;
+  margin: 16px auto;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon img {
+  width: 70%;
+  height: auto;
+}
+
+.lawyer-icon {
+  width: 150px;
+  height: 150px;
+  margin: 16px auto;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lawyer-icon img {
+  width: 70%;
+  height: auto;
+}
+
+.login-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.kakao-btn, .naver-btn, .google-btn, .email-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-logo {
+  width: 25px;
+  height: 25px;
+}
+
+.btn-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-buttons button {
+  width: 150px;
+  height: 50px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 10px;
+}
+
+.btn-content span {
+  margin-top: 1px;
+}
+
+/* 각 버튼별 로고 위치 지정을 위한 공간 */
+.kakao-btn .btn-logo {
+  background-image: none;  /* 카카오 로고 이미지 경로 */
+}
+
+.naver-btn .btn-logo {
+  background-image: none;  /* 네이버 로고 이미지 경로 */
+}
+
+.google-btn .btn-logo {
+  background-image: none;  /* 구글 로고 이미지 경로 */
+}
+
+.email-btn .btn-logo {
+  background-image: none;  /* 이메일 로고 이미지 경로 */
+}
+
+.kakao-btn {
+  background-color: #FEE500;
+}
+
+.naver-btn {
+  background-color: #03C75A;
+  color: white;
+}
+
+.google-btn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.email-btn {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.lawyer-login-btn {
+  background-color: white;
+  border: 1px solid #1a237e;
+  color: #1a237e;
+  margin-top: 16px;
+}
+
+.bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.register-btn, .lawyer-register-btn {
+  flex: 1;
+  background-color: #ffffff;
+  color: #333;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #95B1D4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 5px;
+}
+
+.register-btn:hover, .lawyer-register-btn:hover {
+  background-color: #95B1D4;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.register-btn:active, .lawyer-register-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+h3 {
+  color: #333;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,122 @@
+/* 회원가입 컨테이너 */
+.Register-Container {
+  width: 100%;
+  min-height: auto;
+  margin-top: 100px;
+}
+
+/* 회원가입 박스 */
+.Register-box {
+    display: grid;  
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 600px;
+    height: auto;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* 회원가입 폼 */
+.Register-form {
+    margin-top: 20px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* 회원가입 폼 아이템 */
+.Register-form-item input {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 35px;
+    border: 1px solid #000;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+/* 약관 동의 폼 */
+.Terms-of-use input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+/* 약관 동의 폼 박스 */
+.Terms-of-use-box {
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 30px;
+    background-color: #9EC3E5;
+}
+
+/* 약관 동의 폼 박스 아이템 */
+.Terms-of-use-box-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+/* 약관 동의 폼 박스 아이템 체크박스 */
+.Terms-of-use-box-item input[type="checkbox"] {
+    width: 20px;
+    height: 30px;
+    border: 1px solid #000;
+}
+
+/* 버튼 스타일 */
+.Register-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;  /* 상단 여백 추가 */
+}
+
+/* 버튼 아이템 */
+.Register-button-item {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;  /* 둥근 모서리 */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;  /* 부드러운 효과 */
+}
+
+/* 가입하기 버튼 스타일 */
+.Register-button-item:first-child {
+    background-color: #95B1D4;  /* 로우메이트 테마 색상 */
+    color: white;
+}
+
+/* 가입하기 버튼 호버 스타일 */
+.Register-button-item:first-child:hover {
+    background-color: #7494BD;  /* 호버 시 더 진한 색상 */
+    box-shadow: 0 5px 15px rgba(149, 177, 212, 0.4);  /* 그림자 효과 */
+}
+
+/* 취소 버튼 스타일 */
+.Register-button-item:last-child {
+    background-color: white;
+    color: #95B1D4;
+    border: 2px solid #95B1D4;
+}
+
+/* 취소 버튼 호버 스타일 */
+.Register-button-item:last-child:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
