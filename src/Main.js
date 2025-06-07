@@ -1,10 +1,54 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Main.css';
 import lawmateLogo from './assets/lawmate_logo.png';
+import userDefaultImage from './user-image/default-profile.png';
 
 const Main = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const savedUserInfo = localStorage.getItem('userInfo');
+    
+    if (token && savedUserInfo) {
+      setIsLoggedIn(true);
+      setUserInfo(JSON.parse(savedUserInfo));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
+    setIsLoggedIn(false);
+    setUserInfo(null);
+  };
+
+  const handlePrecedentClick = (e) => {
+    e.preventDefault();
+    
+    if (!isLoggedIn) {
+      const tempUserInfo = {
+        name: "홍길동",
+        email: "test@example.com",
+        profileImage: userDefaultImage,
+        recentCases: [
+          { title: "임차권 관련 문의" },
+          { title: "교통사고 합의" }
+        ]
+      };
+      
+      localStorage.setItem('token', 'dummy-token');
+      localStorage.setItem('userInfo', JSON.stringify(tempUserInfo));
+      setIsLoggedIn(true);
+      setUserInfo(tempUserInfo);
+    } else {
+      handleLogout();
+    }
+  };
 
   const handleSearch = () => {
     console.log('검색:', searchQuery);
@@ -15,10 +59,12 @@ const Main = () => {
       {/* Header */}
       <div className="header">
         <div className="nav-container">
-          <img src={lawmateLogo} alt="Lawmate Logo" className="logo" />
+          <a href="/lawmate_site" style={{ textDecoration: 'none' }}>
+            <img src={lawmateLogo} alt="Lawmate Logo" className="nav-logo" />
+          </a>
           <nav className="nav-menu">
             <Link to="/user-register" className="nav-item">법령</Link>
-            <a href="#" className="nav-item">판례</a>
+            <a href="#" className="nav-item" onClick={handlePrecedentClick}>판례</a>
             <a href="#" className="nav-item">커뮤니티</a>
             <a href="#" className="nav-item">변호사</a>
             <a href="#" className="nav-item">용어사전</a>
@@ -36,14 +82,42 @@ const Main = () => {
               {/* Profile Section */}
               <div className="profile-section">
                 <div className="profile-avatar">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+                  {isLoggedIn ? (
+                    <div className="user-profile-image">
+                      {userInfo?.profileImage ? (
+                        <img 
+                          src={userInfo.profileImage} 
+                          alt="프로필" 
+                          className="profile-img"
+                        />
+                      ) : (
+                        <span>{userInfo?.name?.charAt(0) || 'U'}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  )}
                 </div>
                 <div className="profile-buttons">
-                  <Link to="/login" className="login-btn">로그인</Link>
-                  <Link to="/login" className="signup-link">회원가입</Link>
+                  {isLoggedIn ? (
+                    <div className="logged-in-profile">
+                      <div className="user-name">{userInfo?.name || '사용자'} 님</div>
+                      <div className="user-email">{userInfo?.email}</div>
+                      <button className="logout-btn" onClick={handleLogout}>
+                        로그아웃
+                      </button>
+                      <Link to="/my-page" className="mypage-btn">
+                        마이페이지
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="profile-buttons">
+                      <Link to="/login" className="login-button">로그인/회원가입</Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -51,8 +125,22 @@ const Main = () => {
               <div className="recent-cases">
                 <div className="recent-cases-title">최근 사건 기록</div>
                 <div className="recent-cases-desc">
-                  로그인 하시면 사건 기록을<br />
-                  저장 할 수 있습니다.
+                  {isLoggedIn ? (
+                    userInfo?.recentCases?.length > 0 ? (
+                      <ul className="cases-list">
+                        {userInfo.recentCases.map((case_, index) => (
+                          <li key={index}>{case_.title}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "아직 기록된 사건이 없습니다."
+                    )
+                  ) : (
+                    <>
+                      로그인 하시면 사건 기록을<br />
+                      저장 할 수 있습니다.
+                    </>
+                  )}
                 </div>
               </div>
           </div>

@@ -7,7 +7,7 @@ import UserRegister from './UserRegister';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Main />} />
+      <Route path="/lawmate_site" element={<Main />} />
       <Route path="/login" element={<Login />} />
       <Route path="/user-register" element={<UserRegister />} />
     </Routes>
