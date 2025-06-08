@@ -1,15 +1,22 @@
 {
   "files": {
-    "main.css": "/lawmate_site/static/css/main.77a69eeb.css",
-    "main.js": "/lawmate_site/static/js/main.c4bfc34f.js",
+    "main.css": "/lawmate_site/static/css/main.19dd18bd.css",
+    "main.js": "/lawmate_site/static/js/main.f40a00ce.js",
     "static/js/453.ed3810f9.chunk.js": "/lawmate_site/static/js/453.ed3810f9.chunk.js",
+    "static/media/lawmate_logo.png": "/lawmate_site/static/media/lawmate_logo.f3cd9c2f6629d96b1c17.png",
+    "static/media/Email.png": "/lawmate_site/static/media/Email.c6398b0af8e86454760d.png",
+    "static/media/Google.png": "/lawmate_site/static/media/Google.6034aa34e2d4aa4ceec4.png",
+    "static/media/User.png": "/lawmate_site/static/media/User.af6eccf9ab9656c9be96.png",
+    "static/media/default-profile.png": "/lawmate_site/static/media/default-profile.af6eccf9ab9656c9be96.png",
+    "static/media/Lawyer.png": "/lawmate_site/static/media/Lawyer.7e92a4b93e067825be1f.png",
+    "static/media/Kakao.png": "/lawmate_site/static/media/Kakao.ac73cc8155c85b8642de.png",
     "index.html": "/lawmate_site/index.html",
-    "main.77a69eeb.css.map": "/lawmate_site/static/css/main.77a69eeb.css.map",
-    "main.c4bfc34f.js.map": "/lawmate_site/static/js/main.c4bfc34f.js.map",
+    "main.19dd18bd.css.map": "/lawmate_site/static/css/main.19dd18bd.css.map",
+    "main.f40a00ce.js.map": "/lawmate_site/static/js/main.f40a00ce.js.map",
     "453.ed3810f9.chunk.js.map": "/lawmate_site/static/js/453.ed3810f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77a69eeb.css",
-    "static/js/main.c4bfc34f.js"
+    "static/css/main.19dd18bd.css",
+    "static/js/main.f40a00ce.js"
   ]
 }
