@@ -5,10 +5,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// GitHub Pages 배포에 대비한 basename 설정
+// 개발 환경에서는 비어있고 배포할 때는 '/lawmate_site'가 됩니다
+const basename = process.env.NODE_ENV === 'production' && window.location.hostname !== 'localhost' 
+  ? '/lawmate_site' 
+  : '';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
   </React.StrictMode>
