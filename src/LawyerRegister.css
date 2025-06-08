@@ -1,3 +1,153 @@
+/* 회원가입 컨테이너 */
+.lawyer-Register-Container {
+  width: 100%;
+  min-height: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+/* 회원가입 박스 */
+.lawyer-Register-box {
+    display: grid;  
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 600px;
+    height: auto;
+    border: 1px solid #BCBCBC;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 40px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 회원가입 폼 */
+.lawyer-Register-form {
+    margin-top: 20px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* 회원가입 폼 아이템 */
+.lawyer-Register-form-item input {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    height: 35px;
+    border: 1px solid #000;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+/* 약관 동의 폼 */
+.lawyer-Terms-of-use input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+/* 약관 동의 폼 박스 */
+.lawyer-Terms-of-use-box {
+    width: 500px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 30px;
+    background-color: #9EC3E5;
+}
+
+/* 약관 동의 폼 박스 아이템 */
+.lawyer-Terms-of-use-box-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+/* 약관 동의 폼 박스 아이템 체크박스 */
+.lawyer-Terms-of-use-box-item input[type="checkbox"] {
+    width: 20px;
+    height: 30px;
+    border: 1px solid #000;
+}
+
+/* 버튼 스타일 */
+.lawyer-Register-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* 버튼 아이템 */
+.lawyer-Register-button-item {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 가입하기 버튼 스타일 */
+.lawyer-Register-button-item:first-child {
+    background-color: #95B1D4;
+    color: white;
+}
+
+/* 가입하기 버튼 호버 스타일 */
+.lawyer-Register-button-item:first-child:hover {
+    background-color: #7494BD;
+    box-shadow: 0 5px 15px rgba(149, 177, 212, 0.4);
+}
+
+/* 취소 버튼 스타일 */
+.lawyer-Register-button-item:last-child {
+    background-color: white;
+    color: #95B1D4;
+    border: 2px solid #95B1D4;
+}
+
+/* 취소 버튼 호버 스타일 */
+.lawyer-Register-button-item:last-child:hover {
+    background-color: #f8f9fa;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.lawyer-address-search-button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  padding: 2px 0px 2px 0px;
+  transform: translateY(-50%);
+  background-color: #E0E0E0;
+  color: #5C5C5C;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  width: 60px;
+}
+
+.lawyer-address-input {
+  padding-left: 10px;
+  padding-right: 80px;
+  width: 500px;
+}
+
+.lawyer-address-container {
+  position: relative;
+}
+
 .header {
   background: #9EC3E5;
   width: 100%;
@@ -37,154 +187,4 @@
 
 .nav-item:hover {
   color: rgba(255, 255, 255, 0.8);
-}
-
-/* 회원가입 컨테이너 */
-.Register-Container {
-  width: 100%;
-  min-height: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-/* 회원가입 박스 */
-.Register-box {
-    display: grid;  
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    width: 600px;
-    height: auto;
-    border: 1px solid #BCBCBC;
-    border-radius: 20px;
-    margin: 0 auto;
-    padding: 40px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* 회원가입 폼 */
-.Register-form {
-    margin-top: 20px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-/* 회원가입 폼 아이템 */
-.Register-form-item input {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    width: 500px;
-    height: 35px;
-    border: 1px solid #000;
-    font-size: 13px;
-    border-radius: 10px;
-}
-
-/* 약관 동의 폼 */
-.Terms-of-use input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-}
-
-/* 약관 동의 폼 박스 */
-.Terms-of-use-box {
-    width: 500px;
-    height: 200px;
-    border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 30px;
-    background-color: #9EC3E5;
-}
-
-/* 약관 동의 폼 박스 아이템 */
-.Terms-of-use-box-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left;
-}
-
-/* 약관 동의 폼 박스 아이템 체크박스 */
-.Terms-of-use-box-item input[type="checkbox"] {
-    width: 20px;
-    height: 30px;
-    border: 1px solid #000;
-}
-
-/* 버튼 스타일 */
-.Register-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-/* 버튼 아이템 */
-.Register-button-item {
-    width: 200px;
-    height: 50px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* 가입하기 버튼 스타일 */
-.Register-button-item:first-child {
-    background-color: #95B1D4;
-    color: white;
-}
-
-/* 가입하기 버튼 호버 스타일 */
-.Register-button-item:first-child:hover {
-    background-color: #7494BD;
-    box-shadow: 0 5px 15px rgba(149, 177, 212, 0.4);
-}
-
-/* 취소 버튼 스타일 */
-.Register-button-item:last-child {
-    background-color: white;
-    color: #95B1D4;
-    border: 2px solid #95B1D4;
-}
-
-/* 취소 버튼 호버 스타일 */
-.Register-button-item:last-child:hover {
-    background-color: #f8f9fa;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.address-search-button {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  padding: 2px 0px 2px 0px;
-  transform: translateY(-50%);
-  background-color: #E0E0E0;
-  color: #5C5C5C;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  font-size: 11px;
-  width: 60px;
-}
-
-.address-input {
-  padding-left: 10px;
-  padding-right: 80px;
-  width: 500px;
-}
-
-.address-container {
-  position: relative;
 }

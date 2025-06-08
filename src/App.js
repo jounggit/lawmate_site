@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Main from './Main';
 import Login from './Login';
 import UserRegister from './UserRegister';
+import LawyerRegister from './LawyerRegister';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/lawmate_site" element={<Main />} />
       <Route path="/login" element={<Login />} />
       <Route path="/user-register" element={<UserRegister />} />
+      <Route path="/lawyer-register" element={<LawyerRegister />} />
       {/* 정의되지 않은 모든 경로는 Main으로 리다이렉트 */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

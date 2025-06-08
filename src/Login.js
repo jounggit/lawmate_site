@@ -8,10 +8,16 @@ import naverIcon from './assets/Naver.png';
 import googleIcon from './assets/Google.png';
 import emailIcon from './assets/Email.png';
 import { useNavigate } from 'react-router-dom';
+import userDefaultImage from './assets/User.png';
 
 function LoginPage() {
     const navigate = useNavigate();
     
+    const [showLawyerLogin, setShowLawyerLogin] = useState(false);
+
+    const handleLawyerLoginClick = () => {
+      setShowLawyerLogin(true);
+  };
 
     // 카카오, 네이버, 구글 로그인 주소 설정
     const kakaoLoginUrl = "https://kauth.kakao.com/oauth/authorize?client_id=1234567890&redirect_uri=http://localhost:3000/kakao/callback&response_type=code";
@@ -50,6 +56,57 @@ function LoginPage() {
         navigate('/');
       }
     }, [navigate]);
+    
+    // 변호사 회원가입 페이지로 이동
+    const lawyerRegister = () => {
+      navigate('/lawyer-register');  // 변호사 회원가입 페이지로 이동
+    };
+
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleEmailLogin = () => {
+      // 실제로는 서버에 인증 요청을 해야 하지만, 
+      // 지금은 Main.js와 동일하게 더미 데이터를 사용
+      const userInfo = {
+        name: "홍길동",
+        email: email,  // 입력받은 이메일 사용
+        profileImage: userDefaultImage,  // userDefaultImage를 import 해야 함
+        userType: showLawyerLogin ? 'lawyer' : 'user',  // 변호사/일반 사용자 구분
+        recentCases: [
+          { title: "임차권 관련 문의" },
+          { title: "교통사고 합의" }
+        ],
+        // 변호사 정보 추가
+        lawyerInfo: showLawyerLogin ? {
+          workingHours: {
+            weekday: "09:30 ~ 17:30",
+            lunchTime: "12:30 ~ 13:30",
+            saturday: "10:00 ~ 12:00 (사전 예약 시)"
+          },
+          contact: {
+            phone: "02-1234-1121",
+            address: "서울특별시 서초구 서초대로 219 / 3층"
+          },
+          education: [
+            "이화여자대학교 법과대학 법학과 졸업",
+            "이화여자대학교 법학전문대학원 전문석사 졸업"
+          ],
+          experience: [
+            "변호사, 변리사, 세무사 자격증",
+            "대한변호사협회 대의원",
+            "대법원 국선변호사",
+            "대한변호사협회 대의원"
+          ]
+        } : null
+      };
+      
+      localStorage.setItem('token', 'dummy-token');
+      localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      
+      navigate('/');  // 메인 페이지로 이동
+    };
 
 
 
@@ -119,25 +176,61 @@ function LoginPage() {
                   <img src={naverIcon} alt="Naver" className="btn-logo" />
                   <img src={googleIcon} alt="Google" className="btn-logo" />
                 </div>
-                <input type="email" placeholder="이메일 주소" />
-                <input type="password" placeholder="비밀번호" />
-                <button className="login-btn">로그인</button>
+                <input
+                  type="email"
+                  placeholder="이메일"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button className="login-btn" onClick={handleEmailLogin}>
+                  로그인
+                </button>
               </div>
             )}
             </div>
 
             <div className="lawyer-section">
               <h3>변호사이신가요?</h3>
-              <div className="lawyer-icon">
-                <img src={lawyerIcon} alt="Lawyer" />
-              </div>
-              <button className="lawyer-login-btn">변호사 로그인</button>
+              {!showLawyerLogin && (
+                <div className="lawyer-icon">
+                  <img src={lawyerIcon} alt="Lawyer" />
+                </div>
+              )}
+              {!showLawyerLogin ? (
+                <button className="lawyer-login-btn" onClick={handleLawyerLoginClick}>
+                  변호사 로그인
+                </button>
+              ) : (
+                <div className="lawyer-login-form">
+                  <input
+                    type="email"
+                    placeholder="이메일"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <input
+                    type="password"
+                    placeholder="비밀번호"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button className="login-btn" onClick={handleEmailLogin}>
+                    로그인
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
           <div className="bottom-buttons">
             <button className="register-btn" onClick={emailRegister}>계정이 없으신가요? 이메일로 회원가입</button>
-            <button className="lawyer-register-btn">변호사이신가요? 변호사 회원가입</button>
+            <button className="lawyer-register-btn" onClick={lawyerRegister}>변호사이신가요? 변호사 회원가입</button>
           </div>
         </div>
       </div>
