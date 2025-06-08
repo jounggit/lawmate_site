@@ -207,10 +207,29 @@
 }
 
 .lawyer-login-btn {
-  background-color: white;
+  background-color: #F0F0F0;
   border: 1px solid #1a237e;
   color: #1a237e;
-  margin-top: 16px;
+  margin-top: 30px;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 60%;
+}
+
+.lawyer-login-btn:hover {
+  background-color: #1a237e;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lawyer-login-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .bottom-buttons {
@@ -245,8 +264,9 @@
 }
 
 h3 {
-  color: #333;
+  color: #F0F0F0;
   margin-bottom: 16px;
+  text-shadow: 1px 1px 1px #000000;
 }
 
 .email-login-form {
