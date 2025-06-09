@@ -1,0 +1,158 @@
+.legal-consultation {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.legal-consultation h2 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.submit-btn {
+  background-color: #4a6fa5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #3a5a8a;
+}
+
+.submit-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #e53935;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.analysis-result {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.analysis-result h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.section h4 {
+  color: #4a6fa5;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.section ul {
+  padding-left: 20px;
+}
+
+.section li {
+  margin-bottom: 15px;
+}
+
+.law-content, .precedent-summary {
+  background-color: #f0f7ff;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 5px;
+  font-size: 14px;
+  white-space: pre-line;
+}
+
+.precedent-title {
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.recommendation {
+  background-color: #e8f5e9;
+  padding: 15px;
+  border-radius: 4px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.document-btn {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.document-btn:hover {
+  background-color: #1976d2;
+}
+
+.reset-btn {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.reset-btn:hover {
+  background-color: #616161;
+}
