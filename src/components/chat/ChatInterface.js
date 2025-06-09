@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import lawmateLogo from '../../assets/lawmate_logo.png';
+import lawmateLogo from '../../assets/Lawmate.png';
 import './ChatInterface.css';
 
 const ChatInterface = ({ 
