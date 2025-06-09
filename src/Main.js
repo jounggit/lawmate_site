@@ -87,8 +87,27 @@ const Main = () => {
         text: response.recommendation || "죄송합니다. 답변을 생성하는 데 문제가 발생했습니다.",
         time: new Date().toLocaleTimeString(),
         isUser: false,
-        relatedLaws: response.related_laws?.map(law => `${law.name}: ${law.content}`),
-        relatedPrecedents: response.related_precedents?.map(precedent => `${precedent.case_number}: ${precedent.title}`)
+        relatedLaws: response.related_laws?.map(law => ({
+          title: law.name,
+          content: law.content
+        })),
+        relatedPrecedents: response.related_precedents?.map(precedent => ({
+          title: precedent.case_number,
+          caseName: precedent.title,
+          summary: precedent.summary || "판시사항",
+          ruling: precedent.ruling || "판결요지"
+        })),
+        responseMethods: [
+          {
+            title: "대응방법(참고)",
+            steps: [
+              "내용증명 발송: 사건남에게 임금 지급을 요구하는 내용증명을 보내세요.",
+              "고용노동부 진정: 관할 고용노동지청에 임금 체불에 대한 진정을 제기할 수 있습니다.",
+              "민사소송 제기: 임금 청구를 위한 민사소송을 제기할 수 있습니다.",
+              "형사 고소: 근로기준법 위반으로 형사 고소를 진행할 수 있습니다."
+            ]
+          }
+        ]
       };
       
       setMessages(prev => [...prev, aiMessage]);

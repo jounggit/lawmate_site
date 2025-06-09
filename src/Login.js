@@ -231,6 +231,38 @@ function LoginPage() {
               <button className="register-btn" onClick={emailRegister}>계정이 없으신가요? 이메일로 회원가입</button>
               <button className="lawyer-register-btn" onClick={lawyerRegister}>변호사이신가요? 변호사 회원가입</button>
             </div>
+
+            {/* 프로필 이동 버튼들 */}
+            <div style={{ marginTop: '20px', textAlign: 'center', display: 'flex', gap: '10px', justifyContent: 'center' }}>
+              <button 
+                onClick={() => navigate('/user-profile')} 
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#9EC3E5',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                사용자 프로필로 이동
+              </button>
+              <button 
+                onClick={() => navigate('/lawyer-profile')} 
+                style={{
+                  padding: '10px 20px',
+                  backgroundColor: '#9EC3E5',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '14px'
+                }}
+              >
+                변호사 프로필로 이동
+              </button>
+            </div>
           </div>
         </div>
       </div>

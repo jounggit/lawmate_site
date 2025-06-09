@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import lawmateLogo from '../../assets/Lawmate.png';
+import lawBookIcon from '../../assets/LawBook.png';
+import lawHammerIcon from '../../assets/LawHammer.png';
 import './ChatInterface.css';
 
 const ChatInterface = ({ 
@@ -48,20 +50,72 @@ const ChatInterface = ({
                 <div className="message-text">{message.text}</div>
                 {message.relatedLaws && message.relatedLaws.length > 0 && (
                   <div className="related-content laws-content">
-                    <h4>관련 법령</h4>
+                    <h4>
+                      <img src={lawBookIcon} alt="Law Book" className="law-book-icon" />
+                      관련 법령
+                    </h4>
                     <ul>
                       {message.relatedLaws.map((law, index) => (
-                        <li key={`law-${index}`}>{law}</li>
+                        <li key={`law-${index}`}>
+                          {typeof law === 'string' ? (
+                            law
+                          ) : (
+                            <>
+                              <strong>{law.title}</strong>
+                              <span>{law.content}</span>
+                            </>
+                          )}
+                        </li>
                       ))}
                     </ul>
                   </div>
                 )}
                 {message.relatedPrecedents && message.relatedPrecedents.length > 0 && (
                   <div className="related-content precedents-content">
-                    <h4>관련 판례</h4>
+                    <h4>
+                      <img src={lawHammerIcon} alt="Law Hammer" className="law-hammer-icon" />
+                      관련 판례
+                    </h4>
                     <ul>
                       {message.relatedPrecedents.map((precedent, index) => (
-                        <li key={`precedent-${index}`}>{precedent}</li>
+                        <li key={`precedent-${index}`}>
+                          {typeof precedent === 'string' ? (
+                            precedent
+                          ) : (
+                            <>
+                              <strong>{precedent.title}</strong>
+                              <ul className="precedent-details">
+                                <li>
+                                  <span className="detail-label">사건명 : </span>
+                                  <span className="detail-content">{precedent.caseName}</span>
+                                </li>
+                                <li>
+                                  <span className="detail-label">판시사항 : </span>
+                                  <span className="detail-content">{precedent.summary}</span>
+                                </li>
+                                <li>
+                                  <span className="detail-label">판결요지 : </span>
+                                  <span className="detail-content">{precedent.ruling}</span>
+                                </li>
+                              </ul>
+                            </>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {message.responseMethods && message.responseMethods.length > 0 && (
+                  <div className="related-content response-methods-content">
+                    <h4>
+                      <img src={lawBookIcon} alt="Response Methods" className="law-book-icon" />
+                      {message.responseMethods[0].title}
+                    </h4>
+                    <ul className="response-methods-list">
+                      {message.responseMethods[0].steps.map((step, index) => (
+                        <li key={`step-${index}`}>
+                          <span className="step-content">{step}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>

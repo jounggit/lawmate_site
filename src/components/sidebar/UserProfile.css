@@ -1,0 +1,213 @@
+.user-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.user-profile-header {
+  margin-bottom: 2rem;
+}
+
+.user-profile-header h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.user-profile-header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.user-profile-main {
+  display: flex;
+  gap: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.user-image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e9ecef;
+}
+
+.edit-profile-button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-profile-button:hover {
+  background-color: #0056b3;
+}
+
+.user-info-section {
+  flex: 1;
+}
+
+.info-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 1rem;
+}
+
+.info-item .label {
+  font-weight: 600;
+  color: #495057;
+  min-width: 80px;
+}
+
+.info-item .value {
+  color: #212529;
+}
+
+/* 상담 관리 섹션 스타일 */
+.consultation-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-weight: normal;
+}
+
+.consultation-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 1rem;
+}
+
+.consultation-nav-item {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  color: #495057;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+}
+
+.consultation-nav-item.active {
+  color: #007bff;
+}
+
+.consultation-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #007bff;
+}
+
+.consultation-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.consultation-card {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.consultation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.consultation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.consultation-type {
+  background-color: #e9ecef;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  color: #495057;
+}
+
+.consultation-status {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.consultation-status.ongoing {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.consultation-status.completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.consultation-title {
+  font-size: 25px;
+  color: #212529;
+  margin-bottom: 1rem;
+}
+
+.consultation-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.consultation-date {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.view-detail {
+  padding: 0.25rem 0.75rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-detail:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+} 

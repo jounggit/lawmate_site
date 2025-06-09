@@ -174,10 +174,24 @@
 .related-content h4 {
   margin: 0 0 8px 0;
   font-size: 14px;
-  color: #4a6fa5;
+  color: #5F9AD0;
   font-weight: bold;
   display: flex;
   align-items: center;
+}
+
+.law-book-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  object-fit: contain;
+}
+
+.law-hammer-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  object-fit: contain;
 }
 
 .related-content ul {
@@ -186,12 +200,28 @@
 }
 
 .related-content li {
-  margin-bottom: 6px;
-  line-height: 1.4;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .related-content li:last-child {
   margin-bottom: 0;
+}
+
+.related-content li strong {
+  font-weight: bold;
+  color: #000000;
+  font-size: 15px;
+  display: block;
+}
+
+.related-content li span {
+  font-size: 14px;
+  color: #333;
+  margin-left: 4px;
 }
 
 .chat-footer {
@@ -258,4 +288,55 @@
   color: #777;
   margin-top: 10px;
   font-style: italic;
+}
+
+.precedent-details {
+  list-style: none;
+  padding-left: 8px;
+  margin-top: 8px;
+}
+
+.precedent-details li {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.precedent-details .detail-label {
+  color: #666;
+  font-weight: 500;
+  font-size: 13px;
+  min-width: 60px;
+}
+
+.precedent-details .detail-content {
+  color: #333;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-left: 0;
+  flex: 1;
+}
+
+.response-methods-content {
+  margin-top: 16px;
+}
+
+.response-methods-list {
+  list-style: none;
+  padding-left: 8px;
+  margin-top: 8px;
+}
+
+.response-methods-list li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+}
+
+.response-methods-list .step-content {
+  color: #333;
+  font-size: 13px;
 }
