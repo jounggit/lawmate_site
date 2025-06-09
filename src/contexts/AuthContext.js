@@ -64,16 +64,27 @@ export const AuthProvider = ({ children }) => {
 
   // 회원가입 함수
   const register = async (userData) => {
+    console.log('AuthContext - register 함수 호출됨:', userData);
     setLoading(true);
     setError(null);
     
     try {
-      await apiService.auth.register(userData);
+      console.log('API 호출 전');
+      const response = await apiService.auth.register(userData);
+      console.log('API 호출 결과:', response);
+      
       // 회원가입 후 자동 로그인
-      return await login(userData.email, userData.password);
+      console.log('자동 로그인 시도');
+      const loginSuccess = await login(userData.email, userData.password);
+      console.log('로그인 결과:', loginSuccess);
+      return loginSuccess;
     } catch (err) {
       console.error('회원가입 실패:', err);
-      setError('회원가입 중 오류가 발생했습니다.');
+      if (err.response && err.response.data && err.response.data.detail) {
+        setError(err.response.data.detail);
+      } else {
+        setError('회원가입 중 오류가 발생했습니다.');
+      }
       return false;
     } finally {
       setLoading(false);

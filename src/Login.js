@@ -19,6 +19,7 @@ function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     // 사용자가 이미 로그인한 경우 메인 페이지로 리다이렉트
     useEffect(() => {
@@ -35,9 +36,9 @@ function LoginPage() {
       setShowEmailLogin(true);
     };
 
-    // 카카오, 네이버, 구글 로그인 주소 설정 (실제 URL로 변경 필요)
+    // 소셜 로그인 URL 설정 (실제 URL로 변경 필요)
     const kakaoLoginUrl = "https://kauth.kakao.com/oauth/authorize?client_id=1234567890&redirect_uri=http://localhost:3000/kakao/callback&response_type=code";
-    const naverLoginUrl = "http://localhost:3000/api/auth/naver";
+    const naverLoginUrl = "http://localhost:8000/api/auth/naver";
     const googleLoginUrl = "https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=YOUR_SCOPES&access_type=offline&state=YOUR_RANDOM_STATE";
 
     const kakaoLogin = () => {
@@ -53,26 +54,35 @@ function LoginPage() {
     };
 
     // 이메일 로그인 처리
-    const handleEmailLogin = async () => {
-      setLoginError('');
-      
-      if (!email || !password) {
-        setLoginError('이메일과 비밀번호를 모두 입력해주세요.');
-        return;
+    const handleEmailLogin = async (e) => {
+    e.preventDefault();
+    setLoginError('');
+    
+    if (!email || !password) {
+    setLoginError('이메일과 비밀번호를 모두 입력해주세요.');
+    return;
+    }
+    
+    try {
+    setIsSubmitting(true);
+    // 로그인 API 호출
+    const success = await login(email, password);
+    if (success) {
+      navigate('/');
+      } else {
+      setLoginError('로그인에 실패했습니다. 이메일 또는 비밀번호를 확인해주세요.');
+    }
+    } catch (err) {
+    console.error('로그인 오류:', err);
+    if (err.response && err.response.status === 401) {
+      setLoginError('이메일 또는 비밀번호가 올바르지 않습니다.');
+      } else {
+      setLoginError('로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
       }
-      
-      try {
-        const success = await login(email, password);
-        if (success) {
-          navigate('/');
-        } else {
-          setLoginError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
-        }
-      } catch (err) {
-        console.error('로그인 오류:', err);
-        setLoginError('로그인 중 오류가 발생했습니다.');
-      }
-    };
+      } finally {
+      setIsSubmitting(false);
+    }
+  };
 
     // 회원가입 페이지로 이동
     const emailRegister = () => {
@@ -155,7 +165,7 @@ function LoginPage() {
                   </button>
                 </div>
               ) : (
-                <div className="email-login-form">
+                <form onSubmit={handleEmailLogin} className="email-login-form">
                   <div className="social-icons">
                     <img src={kakaoIcon} alt="Kakao" className="social-logo" onClick={kakaoLogin} />
                     <img src={naverIcon} alt="Naver" className="social-logo" onClick={naverLogin} />
@@ -166,17 +176,19 @@ function LoginPage() {
                     placeholder="이메일"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    disabled={isSubmitting}
                   />
                   <input
                     type="password"
                     placeholder="비밀번호"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    disabled={isSubmitting}
                   />
-                  <button className="login-btn" onClick={handleEmailLogin}>
-                    로그인
+                  <button type="submit" className="login-btn" disabled={isSubmitting}>
+                    {isSubmitting ? '로그인 중...' : '로그인'}
                   </button>
-                </div>
+                </form>
               )}
               </div>
 
@@ -192,23 +204,25 @@ function LoginPage() {
                     변호사 로그인
                   </button>
                 ) : (
-                  <div className="lawyer-login-form">
+                  <form onSubmit={handleEmailLogin} className="lawyer-login-form">
                     <input
                       type="email"
                       placeholder="이메일"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      disabled={isSubmitting}
                     />
                     <input
                       type="password"
                       placeholder="비밀번호"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      disabled={isSubmitting}
                     />
-                    <button className="login-btn" onClick={handleEmailLogin}>
-                      로그인
+                    <button type="submit" className="login-btn" disabled={isSubmitting}>
+                      {isSubmitting ? '로그인 중...' : '로그인'}
                     </button>
-                  </div>
+                  </form>
                 )}
               </div>
             </div>

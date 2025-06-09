@@ -2,11 +2,33 @@ import React, { useState, useEffect } from 'react';
 import './LawyerRegister.css';
 import { useNavigate, Link } from 'react-router-dom';
 import lawmateLogo from './assets/lawmate_logo.png';
+import { useAuth } from './contexts/AuthContext';
+import axios from 'axios';  // axios 명시적으로 import
 
 function LawyerRegister() {
   let info = 'lawyer-Register-form-item';
 
   const navigate = useNavigate();
+  const { registerLawyer, loading, error } = useAuth();
+  
+  // 회원가입 상태 관리
+  const [formData, setFormData] = useState({
+    full_name: '',
+    nickname: '',
+    password: '',
+    passwordCheck: '',
+    email: '',
+    phone: '',
+    mainAddress: '',
+    detailAddress: '',
+    licenseNumber: ''
+  });
+  
+  // 폼 입력값 변경 핸들러
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
 
   // Daum 우편번호 스크립트 추가
   useEffect(() => {
@@ -35,8 +57,12 @@ function LawyerRegister() {
         if(data.buildingName !== '') {
           extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
         }
-        // 조합된 주소를 해당 필드에 넣기
-        document.getElementById('mainAddress').value = `${addr} ${extraAddr}`.trim();
+        // 조합된 주소를 React 상태에 설정
+        const fullAddress = `${addr} ${extraAddr}`.trim();
+        setFormData({
+          ...formData,
+          mainAddress: fullAddress
+        });
       }
     }).open();
   };
@@ -47,52 +73,47 @@ function LawyerRegister() {
   };
 
   // 가입하기 버튼 클릭 시 회원가입 로직 실행
-  const handleRegister = () => {
-    // 입력 필드 값 가져오기
-    const name = document.getElementById("name").value.trim();
-    const nickname = document.getElementById("nickname").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const passwordCheck = document.getElementById("passwordCheck").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const mainAddress = document.getElementById("mainAddress").value.trim();
-    const detailAddress = document.getElementById("address").value.trim();
-  
+  const handleRegister = async () => {
+    console.log('변호사 회원가입 버튼 클릭됨');
     // 필수 입력 필드 체크
-    if (!name) {
+    if (!formData.full_name) {
       alert("이름을 입력해주세요.");
       return;
     }
-    if (!nickname) {
+    if (!formData.nickname) {
       alert("닉네임을 입력해주세요.");
       return;
     }
-    if (!password) {
+    if (!formData.password) {
       alert("비밀번호를 입력해주세요.");
       return;
     }
-    if (!passwordCheck) {
+    if (!formData.passwordCheck) {
       alert("비밀번호 확인을 입력해주세요.");
       return;
     }
-    if (password !== passwordCheck) {
+    if (formData.password !== formData.passwordCheck) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
     }
-    if (!email) {
+    if (!formData.email) {
       alert("이메일을 입력해주세요.");
       return;
     }
-    if (!phone) {
+    if (!formData.phone) {
       alert("전화번호를 입력해주세요.");
       return;
     }
-    if (!mainAddress) {
+    if (!formData.mainAddress) {
       alert("주소를 검색해주세요.");
       return;
     }
-    if (!detailAddress) {
+    if (!formData.detailAddress) {
       alert("상세 주소를 입력해주세요.");
+      return;
+    }
+    if (!formData.licenseNumber) {
+      alert("변호사 자격번호를 입력해주세요.");
       return;
     }
 
@@ -101,7 +122,63 @@ function LawyerRegister() {
       alert("필수 약관에 동의해주세요.");
       return;
     }
-    navigate('/login');  // 로그인 페이지로 이동
+    
+    // 회원가입 데이터 준비
+    const lawyerData = {
+      email: formData.email,
+      password: formData.password,
+      full_name: formData.full_name,
+      nickname: formData.nickname,
+      phone: formData.phone,
+      address: `${formData.mainAddress} ${formData.detailAddress}`.trim(),
+      license_number: formData.licenseNumber,
+      specialization: [], // 추후 추가 가능
+      is_verified: false // 관리자 인증 필요
+    };
+    
+    console.log('변호사 회원가입 데이터:', lawyerData);
+    
+    try {
+      // 직접 API 호출
+      console.log('변호사 회원가입 API 직접 호출 시도');
+      
+      const response = await axios.post('http://localhost:8000/api/v1/auth/register/lawyer', lawyerData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      console.log('변호사 회원가입 API 호출 결과:', response.data);
+      
+      if (response.data && response.data.access_token) {
+        localStorage.setItem('token', response.data.access_token);
+        alert('변호사 회원가입이 완료되었습니다! 관리자 인증 후 서비스를 이용하실 수 있습니다.');
+        navigate('/');
+      } else {
+        alert('변호사 회원가입에 실패했습니다. 응답에 토큰이 없습니다.');
+      }
+    } catch (err) {
+      console.error("변호사 회원가입 오류:", err);
+      
+      let errorMessage = '변호사 회원가입 중 오류가 발생했습니다.';
+      
+      if (err.response) {
+        // 서버에서 응답이 왔지만 오류 상태코드
+        console.error('서버 응답:', err.response.data);
+        console.error('상태 코드:', err.response.status);
+        
+        if (err.response.data && err.response.data.detail) {
+          errorMessage = `오류: ${err.response.data.detail}`;
+        }
+      } else if (err.request) {
+        // 요청은 보냈지만 응답을 받지 못함
+        errorMessage = '서버에 연결할 수 없습니다. 서버가 실행 중인지 확인하세요.';
+      } else {
+        errorMessage = `오류 발생: ${err.message}`;
+      }
+      
+      alert(errorMessage);
+    }
   };
 
   // 약관 동의 상태 관리
@@ -155,58 +232,138 @@ function LawyerRegister() {
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>이름</p>
               <div className={info}>
-                <input type="text" id="name" name="name" placeholder="이름을 입력해주세요." style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="text" 
+                  id="full_name" 
+                  name="full_name" 
+                  placeholder="이름을 입력해주세요." 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.full_name}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>닉네임</p>
               <div className={info}>
-                <input type="text" id="nickname" name="nickname" placeholder="로우메이트에서 다른 사람들에게 보일 닉네임을 정해주세요." style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="text" 
+                  id="nickname" 
+                  name="nickname" 
+                  placeholder="로우메이트에서 다른 사람들에게 보일 닉네임을 정해주세요." 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.nickname}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>비밀번호</p>
               <div className={info}>
-                <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요.(숫자, 영문, 특수문자 포함 10~15글자)" style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  placeholder="비밀번호를 입력해주세요.(숫자, 영문, 특수문자 포함 10~15글자)" 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.password}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>비밀번호 확인</p>
               <div className={info}>
-                <input type="password" id="passwordCheck" name="passwordCheck" placeholder="비밀번호 재입력" style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="password" 
+                  id="passwordCheck" 
+                  name="passwordCheck" 
+                  placeholder="비밀번호 재입력" 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.passwordCheck}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>이메일 주소</p>
               <div className={info}>
-                <input type="email" id="email" name="email" placeholder="이메일 주소를 입력해주세요." style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="이메일 주소를 입력해주세요." 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>전화번호</p>
               <div className={info}>
-                <input type="tel" id="phone" name="phone" placeholder="전화번호를 입력해주세요." style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  placeholder="전화번호를 입력해주세요." 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>주소</p>
               <div className={`${info} lawyer-address-container`}>
-                <input type="text" id="mainAddress" name="mainAddress" placeholder="주소를 검색해주세요" className="lawyer-address-input" readOnly/>
+                <input 
+                  type="text" 
+                  id="mainAddress" 
+                  name="mainAddress" 
+                  placeholder="주소를 검색해주세요" 
+                  className="lawyer-address-input" 
+                  value={formData.mainAddress}
+                  onChange={handleChange}
+                  readOnly
+                />
                 <button type="button" onClick={handleAddressSearch} className="lawyer-address-search-button">주소찾기</button>
               </div>
             </div>
             <div className="lawyer-Register-form">
               <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>상세 주소</p>
               <div className={info}>
-                <input type="text" id="address" name="address" placeholder="상세 주소를 입력해주세요." style={{paddingLeft: '10px'}}/>
+                <input 
+                  type="text" 
+                  id="detailAddress" 
+                  name="detailAddress" 
+                  placeholder="상세 주소를 입력해주세요." 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.detailAddress}
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <div className="lawyer-Register-form">
-              <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>변호사 자격 확인</p>
+              <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px'}}>변호사 자격번호</p>
               <div className={info}>
-                <input type="text" id="address" name="address" placeholder="변호사 자격증 파일을 첨부해주세요. (확인까지 시간이 걸릴 수 있습니다.)" style={{paddingLeft: '10px', flex: 1}}/>
+                <input 
+                  type="text" 
+                  id="licenseNumber" 
+                  name="licenseNumber" 
+                  placeholder="변호사 자격번호를 입력해주세요." 
+                  style={{paddingLeft: '10px'}}
+                  value={formData.licenseNumber}
+                  onChange={handleChange}
+                />
               </div>
             </div>
+            
+            {/* 에러 메시지 표시 */}
+            {error && (
+              <div className="error-message" style={{color: 'red', marginTop: '10px'}}>
+                {error}
+              </div>
+            )}
           </div>
           <div className="lawyer-Terms-of-use">
             <p style={{fontSize: '13px', fontWeight: 'bold', marginBottom: '10px', textAlign: 'left', marginTop: '30px'}}>약관 동의</p>
